@@ -8,6 +8,13 @@ import { ThemeProvider } from "./context/ThemeProvider";
 import { AuthProvider } from "./context/AuthContext";
 import Layout from "./components/layout/Layout";
 import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
+import EventsPage from "./pages/EventsPage";
+import LostFoundPage from "./pages/LostFoundPage";
+import DiscussionsPage from "./pages/DiscussionsPage";
+import CampusTourPage from "./pages/CampusTourPage";
+import NoticeBoardPage from "./pages/NoticeBoardPage";
+import AdminPage from "./pages/AdminPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,7 +30,13 @@ const App = () => (
             <Layout>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                {/* Additional routes will be added later for other features */}
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/events" element={<EventsPage />} />
+                <Route path="/lost-found" element={<LostFoundPage />} />
+                <Route path="/discussions" element={<DiscussionsPage />} />
+                <Route path="/campus-tour" element={<CampusTourPage />} />
+                <Route path="/notices" element={<NoticeBoardPage />} />
+                <Route path="/admin" element={<AdminPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Layout>
