@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -13,7 +12,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { collection, addDoc, getDocs, query, orderBy, Timestamp, deleteDoc, doc, updateDoc, where, getDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, query, orderBy, Timestamp, deleteDoc, doc, updateDoc, where, getDoc, DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
 import { firestore } from '@/lib/firebase';
 import { MessageSquare, User, Plus, MessageCircle, Trash2, AlertTriangle, ThumbsUp } from 'lucide-react';
 
@@ -101,19 +100,19 @@ const DiscussionsPage = () => {
       const querySnapshot = await getDocs(q);
       
       const fetchedPosts: ForumPost[] = [];
-      querySnapshot.forEach((doc) => {
+      querySnapshot.forEach((doc: QueryDocumentSnapshot<DocumentData>) => {
         const data = doc.data();
         fetchedPosts.push({
           id: doc.id,
-          title: data.title,
-          content: data.content,
-          category: data.category,
-          authorId: data.authorId,
-          authorName: data.authorName,
-          authorPhotoUrl: data.authorPhotoUrl,
+          title: data.title as string,
+          content: data.content as string,
+          category: data.category as string,
+          authorId: data.authorId as string,
+          authorName: data.authorName as string,
+          authorPhotoUrl: data.authorPhotoUrl as string | undefined,
           createdAt: data.createdAt.toDate(),
-          commentCount: data.commentCount || 0,
-          likeCount: data.likeCount || 0,
+          commentCount: data.commentCount as number || 0,
+          likeCount: data.likeCount as number || 0,
         });
       });
       
